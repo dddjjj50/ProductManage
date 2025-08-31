@@ -33,4 +33,36 @@ public class CategoryDAO {
 
 		return categoriesList;
 	}
+	
+	//=====================
+	//Week11 登録機能の追加
+	//=====================
+	
+	public void addCategory(int id,String categoryName) throws SQLException, ClassNotFoundException {
+		
+		try (
+				Connection con = ConnectionManager.getConnection();
+				java.sql.PreparedStatement pst =con.prepareStatement( 
+						"INSERT INTO categories (id,category_name) VALUES (?,?)"
+		)){
+			//プレースホルダに値をセット
+			pst.setInt(1, id);
+			pst.setString(2, categoryName);
+			
+			//SQL実行
+			int result = pst.executeUpdate();
+			
+			//結果を振り分け
+			if (result>0) {
+				System.out.println("登録成功☆");
+				System.out.printf("登録内容： id = %2d , category_name = %s\n",id,categoryName);
+			}else {
+				System.out.println("登録失敗…△");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 }

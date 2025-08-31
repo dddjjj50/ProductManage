@@ -7,7 +7,8 @@ import java.sql.SQLException;
 public class ConnectionManager {
 
 	//まずDB接続の材料
-	private static final String url = "jdbc:mysql://localhost:3306/product_management";
+	private static final String url =
+			"jdbc:mysql://localhost:3306/product_management";
 	private static final String user = "root";
 	private static final String pass = "root";
 

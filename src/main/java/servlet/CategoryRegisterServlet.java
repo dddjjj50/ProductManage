@@ -14,16 +14,16 @@ import model.dao.CategoryDAO;
 import model.entity.CategoryBean;
 
 /**
- * Servlet implementation class CategoryListServlet
+ * Servlet implementation class CategoryRegisterServlet
  */
-@WebServlet("/CategoryListServlet")
-public class CategoryListServlet extends HttpServlet {
+@WebServlet("/CategoryRegisterServlet")
+public class CategoryRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CategoryListServlet() {
+	public CategoryRegisterServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,7 +35,9 @@ public class CategoryListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/category-register.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -43,22 +45,36 @@ public class CategoryListServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("UTF-8");
 
 		try {
-			//daoからカテゴリ一覧を取得
-			List<CategoryBean> categoriesList = new CategoryDAO().allCategories();
+			// DAOをインスタンス化
+			CategoryDAO dao = new CategoryDAO();
 
-			//リクエストスコープにセット
+			// フォームからデータを受け取り、DBに登録
+			int id = Integer.parseInt(request.getParameter("id"));
+			String categoryName = request.getParameter("categoryName");
+			dao.addCategory(id, categoryName);
+
+			// DBに登録後、最新のカテゴリ一覧を取得
+			List<CategoryBean> categoriesList = dao.allCategories();
+
+			// 取得したリストをリクエストスコープにセット
 			request.setAttribute("categoriesList", categoriesList);
 
-			//JSPに転送
+			// カテゴリ一覧ページに転送
 			RequestDispatcher rd = request.getRequestDispatcher("/category-list.jsp");
 			rd.forward(request, response);
 
 		} catch (Exception e) {
-			System.err.println("カテゴリ一覧取得中に例外発生: " + e.getMessage());
-		    e.printStackTrace();
-
+			e.printStackTrace(); 
 		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/category-list.jsp");
+	    rd.forward(request, response);
+
 	}
+
 }
