@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,7 @@ public class CategoryRegisterServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -43,19 +45,59 @@ public class CategoryRegisterServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		request.setCharacterEncoding("UTF-8");
+
+		//★入力した値に問題あればアラート出す。
+		//まずフォームに入力した値を受け取る
+		String inputId = request.getParameter("id");
+		String inputCategoryName = request.getParameter("categoryName");
+		//アラートをリスト化
+		List<String> alert = new ArrayList<>();
 
 		try {
 			// DAOをインスタンス化
 			CategoryDAO dao = new CategoryDAO();
+			List<CategoryBean> existingCategories = dao.allCategories();
+			int id = 0;
+			//まずIDのチェック
+			if (inputId == null || inputId.isEmpty()) {
+		        alert.add("IDは必須です");
+		    } else if (!inputId.matches("^[0-9]+$")) {
+		        alert.add("IDは半角数字で入力してください");
+		    } else {
+		    	id = Integer.parseInt(inputId);
+		        for (CategoryBean bean : existingCategories) {
+		            if (bean.getId() == id) {
+		                alert.add("このIDは既に登録済です");
+		                break;
+		            }
+		        }
+		    }
 
-			// フォームからデータを受け取り、DBに登録
-			int id = Integer.parseInt(request.getParameter("id"));
-			String categoryName = request.getParameter("categoryName");
+			//次にカテゴリ名のチェック
+			if (inputCategoryName == null || inputCategoryName.isEmpty()) {
+			    alert.add("カテゴリ名は必須です");
+			} else {
+			    for (CategoryBean bean : existingCategories) {
+			        if (bean.getCategoryName().equals(inputCategoryName)) {
+			            alert.add("このカテゴリ名は既に登録済です");
+			            break;
+			        }
+			    }
+			}
+
+			if (!alert.isEmpty()) {
+			    request.setAttribute("alert", alert);
+			    RequestDispatcher rd = request.getRequestDispatcher("/category-register.jsp");
+			    rd.forward(request, response);
+			    return;
+			}
+			String categoryName = inputCategoryName;
 			dao.addCategory(id, categoryName);
 
 			// DBに登録後、最新のカテゴリ一覧を取得
@@ -69,12 +111,12 @@ public class CategoryRegisterServlet extends HttpServlet {
 			rd.forward(request, response);
 
 		} catch (Exception e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
+		    request.setAttribute("alert", alert);
+		    RequestDispatcher rd = request.getRequestDispatcher("/category-register.jsp");
+		    rd.forward(request, response);
+
 		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/category-list.jsp");
-	    rd.forward(request, response);
 
 	}
-
 }

@@ -33,25 +33,25 @@ public class CategoryDAO {
 
 		return categoriesList;
 	}
-	
+
 	//=====================
 	//Week11 登録機能の追加
 	//=====================
-	
+
 	public void addCategory(int id,String categoryName) throws SQLException, ClassNotFoundException {
-		
+
 		try (
 				Connection con = ConnectionManager.getConnection();
-				java.sql.PreparedStatement pst =con.prepareStatement( 
+				java.sql.PreparedStatement pst =con.prepareStatement(
 						"INSERT INTO categories (id,category_name) VALUES (?,?)"
 		)){
 			//プレースホルダに値をセット
 			pst.setInt(1, id);
 			pst.setString(2, categoryName);
-			
+
 			//SQL実行
 			int result = pst.executeUpdate();
-			
+
 			//結果を振り分け
 			if (result>0) {
 				System.out.println("登録成功☆");
@@ -64,5 +64,33 @@ public class CategoryDAO {
 			throw e;
 		}
 	}
-	
+
+	//========================================================
+	//カテゴリ登録の際、既にあるデータとかぶってないかチェック
+	//========================================================
+
+	public boolean checkInput(int inputId) throws SQLException,ClassNotFoundException {
+
+		List<CategoryBean> categories = allCategories();
+		for(CategoryBean bean: categories) {
+			if(bean.getId() == inputId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkInputCategoryName(String inputCategoryName)throws SQLException,ClassNotFoundException {
+		List<CategoryBean> categories = allCategories();
+		for(CategoryBean bean: categories) {
+			if(bean.getCategoryName().equals(inputCategoryName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
 }
