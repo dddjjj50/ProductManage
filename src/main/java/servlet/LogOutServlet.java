@@ -51,10 +51,5 @@ public class LogOutServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/login_form.jsp");
 		dispatcher.forward(request, response);
 		
-		
-		
-		
-		
 	}
-
 }

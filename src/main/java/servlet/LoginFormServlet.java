@@ -12,11 +12,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * ユーザー認証を行うサーブレット
- * <div style="color:red">IDかパスワード、もしくは両方とも間違っています！</div>
- * <div style="color:blue">ログアウトしました。在庫管理をする場合はログインしてください。</div>
- * 
  */
-@WebServlet("/LoginFormServlet")	//※パスあとで確認
+@WebServlet("/LoginFormServlet")
 public class LoginFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -74,9 +71,5 @@ public class LoginFormServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login_form.jsp");
 			dispatcher.forward(request, response);
 		}
-		
-		
-		
 	}
-
 }

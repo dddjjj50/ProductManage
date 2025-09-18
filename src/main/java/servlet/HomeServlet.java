@@ -34,7 +34,6 @@ public class HomeServlet extends HttpServlet {
 		
 		//セッションチェック
 		HttpSession session = request.getSession(false); //falseで新規作成しない
-		String user = (session != null) ? (String)session.getAttribute("user") : null;
 		
 		//セッションが切れた場合はログインフォームへ
 		if(session == null || session.getAttribute("user") == null) {
