@@ -3,6 +3,7 @@ package model.entity;
 import java.io.Serializable;
 
 public class SupplierBean implements Serializable {
+
 	private int id;
 	private String supplier_name;
 
@@ -22,6 +23,5 @@ public class SupplierBean implements Serializable {
     public void setSupplierName(String supplier_name) {
     	this.supplier_name = supplier_name;
     }
-
 
 }
