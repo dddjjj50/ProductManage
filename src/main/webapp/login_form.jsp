@@ -19,8 +19,8 @@ if (user != null) {
 %>
 </head>
 <body>
-
-<h1>ログインフォーム</h1>
+<%@ include file="WEB-INF/header.jsp" %>
+<h3>ログインフォーム</h3>
 
 <br/>
 

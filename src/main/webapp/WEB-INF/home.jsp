@@ -4,20 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>WELCOME</title>
+<title>HOME</title>
 </head>
 <body>
 
-<h1>WELCOME</h1>
+<jsp:include page="/WEB-INF/header.jsp" />
+
+<h3>ホーム</h3>
+
+
+
+<a href="${pageContext.request.contextPath}/ProductsList1Servlet">商品一覧表示</a>
+<br/>
+<a href="${pageContext.request.contextPath}/AddProductservlet">商品登録</a><br/>　※サーブレットのパスにする！
+
+
+
 
 <br/>
 
-※来週からいろいろ作る
+
 
 <!-- ログアウトボタン -->
 <form action="LogOutServlet" method="post">
 	<p>
-		<input type="submit" value="ログアウト">
+		<input type="submit" value="ログアウト☆彡">
 	</p>
 </form>
 
