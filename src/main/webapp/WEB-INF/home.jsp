@@ -12,18 +12,11 @@
 
 <h3>ホーム</h3>
 
-
-
 <a href="${pageContext.request.contextPath}/ProductsList1Servlet">商品一覧表示</a>
 <br/>
-<a href="${pageContext.request.contextPath}/AddProductservlet">商品登録</a><br/>　※サーブレットのパスにする！
-
-
-
+<a href="${pageContext.request.contextPath}/AddProductservlet">商品登録</a><br/>
 
 <br/>
-
-
 
 <!-- ログアウトボタン -->
 <form action="LogOutServlet" method="post">

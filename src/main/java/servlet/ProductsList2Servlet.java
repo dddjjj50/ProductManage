@@ -54,10 +54,6 @@ public class ProductsList2Servlet extends HttpServlet {
 		    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "商品一覧の取得に失敗しました");
 		}
 		
-		
-		
-		
-		
 	}
 
 }

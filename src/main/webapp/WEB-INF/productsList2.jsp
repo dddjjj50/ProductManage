@@ -39,16 +39,13 @@
 </c:if>
 <br/>
 
-<!-- カテゴリ選択ページに戻る -->
 <a href="${pageContext.request.contextPath}/ProductsList1Servlet">カテゴリ選択ページへ戻る</a>
-
 <br><br>
 
 ▷<a href="${pageContext.request.contextPath}/AddProductservlet">商品登録の場合はこちら</a>
 <br><br><br>
 <!-- フッター -->
 <jsp:include page="/WEB-INF/footer.jsp" />
-
 
 </body>
 </html>

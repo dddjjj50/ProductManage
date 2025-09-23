@@ -61,7 +61,6 @@ public class ProductDAO {
 					res.getInt("stock"),
 					res.getInt("category_id"),
 					res.getInt("supplier_id")
-
 				);
 				choiceCategoriesList.add(bean);
 			}
@@ -72,7 +71,7 @@ public class ProductDAO {
 	}
 	
 	//===================================
-	//選択したカテゴリのproductを表示する
+	//新しいproductを登録する
 	//===================================
 	
 	public void addProduct(ProductBean product) throws SQLException, ClassNotFoundException {

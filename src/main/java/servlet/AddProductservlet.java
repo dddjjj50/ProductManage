@@ -24,6 +24,7 @@ public class AddProductservlet extends HttpServlet {
     public AddProductservlet() {
         super();
     }
+    
     //フォームの「カテゴリ」「取引会社」のプルダウン表示
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -60,7 +61,6 @@ public class AddProductservlet extends HttpServlet {
 			
 			//doGetの呼び出し
 			doGet(request,response);
-			
 			
 		}catch(Exception e) {
 			e.printStackTrace();

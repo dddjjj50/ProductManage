@@ -35,7 +35,5 @@
 <!-- フッター -->
 <jsp:include page="/WEB-INF/footer.jsp" />
 
-
-メモ！あとで消す！ある程度できたらファイルをWEB-INFに移動する
 </body>
 </html>
