@@ -2,6 +2,8 @@
 
 <!-- welcome.jspへのリンク -->
 
+<br/>
+
 <hr style="color:#AFDFE4;">
 
 <div>

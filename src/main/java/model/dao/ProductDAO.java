@@ -28,9 +28,7 @@ public class ProductDAO {
 						res.getInt("id"),
 						res.getString("name"),
 						res.getInt("price"),
-						res.getInt("stock"),
-						res.getInt("category_id"),
-						res.getInt("supplier_id")
+						res.getInt("stock")
 				);
 				list.add(bean);
 			}
@@ -58,9 +56,7 @@ public class ProductDAO {
 					res.getInt("id"),
 					res.getString("name"),
 					res.getInt("price"),
-					res.getInt("stock"),
-					res.getInt("category_id"),
-					res.getInt("supplier_id")
+					res.getInt("stock")
 				);
 				choiceCategoriesList.add(bean);
 			}
@@ -93,4 +89,55 @@ public class ProductDAO {
 		}
 	}
 	
+	//============================================
+	//week17:削除確認ページにとぶためのメソッド
+	//============================================
+	
+	public ProductBean ProductInfoById(int id) throws SQLException, ClassNotFoundException {
+
+		try (
+				Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(
+						"SELECT id,name,price,stock FROM products WHERE id = ?"
+						)
+		){
+			pst.setInt(1, id);
+			ResultSet res = pst.executeQuery();
+			
+			if (res.next()) {
+				ProductBean bean = new ProductBean(
+					res.getInt("id"),
+					res.getString("name"),
+					res.getInt("price"),
+					res.getInt("stock")
+				);
+				return bean;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//===================================
+	//week17:ボタンを押した商品を削除する
+	//===================================
+	
+	public void deleteProduct(int id) throws SQLException, ClassNotFoundException {
+		
+		try(
+				Connection con  = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(
+						"DELETE FROM products WHERE id = ?")
+		){
+			pst.setInt(1, id);
+			int result = pst.executeUpdate();
+			
+			//IDが存在しない場合
+			if(result == 0) {
+				throw new SQLException("商品情報を取得できませんでした");
+			}
+		} //例外はサーブレットで処理する
+		
+	}
 }

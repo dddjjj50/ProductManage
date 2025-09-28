@@ -10,14 +10,14 @@ public class ProductBean implements Serializable {
 	private int stock;
 	private int categoryId;
 	private int supplierId;
+	private String categoryName;
+	private String supplierName;
 
-	public ProductBean(int id, String productName,int price,int stock,int categoryId,int supplierId) {
+	public ProductBean(int id, String productName,int price,int stock) {
 		this.id = id;
 		this.productName = productName;
 		this.price = price;
 		this.stock = stock;
-		this.categoryId = categoryId;
-		this.supplierId = supplierId;
 	}
 
 	//ゲッター
@@ -27,6 +27,9 @@ public class ProductBean implements Serializable {
 	public int getStock() { return stock; }
 	public int getCategoryId() { return categoryId; }
 	public int getSupplierId() { return supplierId; }
+	
+	public String getCategoryName() { return categoryName; }
+	public String getSupplierName() { return supplierName; }
 
 	//セッター
 	public void setId(int id) {
@@ -46,6 +49,12 @@ public class ProductBean implements Serializable {
     }
     public void setSupplierId(int supplierId) {
     	this.supplierId = supplierId;
+    }
+    public void setCategoryName(String categoryName) {
+    	this.categoryName = categoryName;
+    }
+    public void setSupplierName(String supplierName) {
+    	this.supplierName = supplierName;
     }
 
 }

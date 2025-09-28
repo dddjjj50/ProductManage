@@ -9,10 +9,9 @@
 <body>
 
 <jsp:include page="/WEB-INF/header.jsp" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <h3>商品一覧②</h3>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- 選択したカテゴリで商品がない場合 -->
 <c:if test="${empty productList}">
@@ -26,15 +25,22 @@
 			<th>商品名</th>
 			<th>価格</th>
 			<th>在庫数</th>
+			<th></th>
 		</tr>
-		<c:forEach var="product" items="${productList}">
-			<tr>
+		<c:forEach var="product" items="${productList}"><tr>
 				<td>${product.id}</td>
 				<td>${product.productName}</td>
 				<td>${product.price}</td>
 				<td>${product.stock}</td>
-			</tr>
-		</c:forEach>
+				<td><form action="DeleteProduct1Servlet" method="post">
+					<%--隠しフィールドでサーブレットにidを送る --%>
+					<input type="hidden" name="id" value="${product.id}">
+					<input type="submit" value="削除">
+				</form></td>
+		</tr></c:forEach>
+		<tr>
+			
+		</tr>
 	</table>
 </c:if>
 <br/>

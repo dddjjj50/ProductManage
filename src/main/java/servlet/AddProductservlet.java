@@ -49,11 +49,11 @@ public class AddProductservlet extends HttpServlet {
 			String name = request.getParameter("name");
 			int price = Integer.parseInt(request.getParameter("price"));
 			int stock = Integer.parseInt(request.getParameter("stock"));
-			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-			int supplierId = Integer.parseInt(request.getParameter("supplierId"));
+			//int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+			//int supplierId = Integer.parseInt(request.getParameter("supplierId"));
 			
 			//beanに登録
-			ProductBean product = new ProductBean(0,name,price,stock,categoryId,supplierId);
+			ProductBean product = new ProductBean(0,name,price,stock);
 			new ProductDAO().addProduct(product);
 			
 			//登録成功メッセージ

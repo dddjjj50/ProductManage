@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionManager {
 
 	//まずDB接続の材料
-	private static final String url =
+	private static final String url = //"aaaaa";
 			"jdbc:mysql://localhost:3306/product_management?useUnicode=true&characterEncoding=UTF-8";
 	private static final String user = "root";
 	private static final String pass = "root";

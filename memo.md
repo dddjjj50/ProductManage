@@ -1,13 +1,11 @@
-16週目やる！
 
-■ヘッダー
-<%@ include file="WEB-INF/header.jsp" %>
-<jsp:include page="/WEB-INF/header.jsp" />
-<h3></h3>
 
-■フッター
-<%@ include file="/WEB-INF/footer.jsp" %>
-<jsp:include page="/WEB-INF/footer.jsp" />
+■商品一覧画面の削除ボタンを押す。
 
-リンク
-<a href=""></a>
+■サーブレットに、どの商品を削除するのか知らせる。
+
+■サーブレットは、その商品の情報を取得する。
+
+■取得した情報を削除確認画面に渡す。
+
+■削除確認画面で、「この商品を本当に削除しますか？」と表示する。

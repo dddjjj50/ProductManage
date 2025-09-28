@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -49,9 +50,19 @@ public class ProductsList2Servlet extends HttpServlet {
 			//JSPにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/productsList2.jsp");
 			dispatcher.forward(request, response);
-		}catch(Exception e) {
+		}catch(SQLException | ClassNotFoundException e) { 
 			e.printStackTrace();
-		    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "商品一覧の取得に失敗しました");
+			request.setAttribute("product", null);
+			
+			//商品情報が取得できなかったとき
+			if(e.getMessage().contains("商品情報を取得できませんでした")) {
+				request.setAttribute("errorMsg", "商品情報を取得できませんでした。");
+			}else {
+				request.setAttribute("errorMsg", "DB接続に失敗しました。");
+			}
+			
+			//削除確認画面に戻す。
+			request.getRequestDispatcher("/WEB-INF/deleteProduct.jsp").forward(request, response);
 		}
 		
 	}
