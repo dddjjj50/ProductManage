@@ -28,10 +28,15 @@ public class ProductsList2Servlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//カテゴリIDを取得
+		String categoryIdStr = request.getParameter("choiceCategory"); 
+		int categoryId = 0;
+		
+		if(categoryIdStr != null && !categoryIdStr.isEmpty()) {
+			categoryId = Integer.parseInt(categoryIdStr);
+		}
+		
 		try {
-			//カテゴリIDを取得
-			String categoryIdStr = request.getParameter("choiceCategory"); 
-			int categoryId = Integer.parseInt(categoryIdStr);
 			
 			//DAOで商品一覧を取得
 			ProductDAO dao = new ProductDAO();
